@@ -6,4 +6,11 @@ if [ ! -e $THUMBS_PATH ]; then
   mkdir $THUMBS_PATH
 fi
 
-mogrify -format jpg -path $THUMBS -thumbnail 320x320 *tif
+for TIF in $(ls ./*.tif)
+do
+  echo $TIF
+  JPG=${TIF/.tif/.jpg}
+  #mogrify -format jpg -path $THUMBS -thumbnail 320x320 $TIF
+  convert $TIF -thumbnail 320x320 -unsharp 0x.5 $THUMBS_PATH"/"$JPG
+done
+#find -name '*.tif ' -print0 | xargs -0 mogrify -format jpg -path $THUMBS -thumbnail
