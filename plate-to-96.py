@@ -31,6 +31,8 @@ x1 = int(conf['x0'])
 x2 = int(conf['x0'])+int(conf['width'])
 y1 = int(conf['y0'])
 y2 = int(conf['y0'])+int(conf['height'])
+cols = int(conf['columns'])
+rows = int(conf['rows'])
 
 ## Manupulate
 if( int(conf['flip_horizontal']) > 0 ):
@@ -42,16 +44,16 @@ if( rotate_angle != 0 ):
 im = im.crop( (x1,y1,x2,y2) )
 
 x_max, y_max = im.size
-x_well_size = float(x_max)/12
-y_well_size = float(y_max)/8
+x_well_size = float(x_max)/cols
+y_well_size = float(y_max)/rows
 
 im_draw = im.copy()
 draw = ImageDraw.Draw(im_draw)
-for col in range(0,13):
+for col in range(0,cols+1):
     x_well_step = int(x_well_size*col)
     draw.line((x_well_step,0,x_well_step,y_max),fill=200, width=5)
 
-for row in range(0,9):
+for row in range(0,rows+1):
     y_well_step = int(y_well_size*row)
     draw.line((0,y_well_step,x_max,y_well_step),fill=200, width=5)
 
@@ -59,8 +61,8 @@ im_draw = im_draw.resize((int(x_max*0.10),int(y_max*0.10)),  Image.ANTIALIAS)
 im_draw.save('%s.grid.jpg'%filename_base,'jpeg', quality=50)
 
 row_list = ['A','B','C','D','E','F','G','H']
-for col in range(0,12):
-    for row in range(0,8):
+for col in range(0,cols):
+    for row in range(0,rows):
         x1 = int(x_well_size * col)
         y1 = int(y_well_size * row)
         x2 = int(x_well_size * (col+1))
