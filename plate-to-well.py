@@ -9,7 +9,7 @@ import numpy as np
 filename_tif = sys.argv[1]
 filename_base = filename_tif.replace('.tiff','').replace('.tif','')
 
-filename_conf = 'plate-to-96.json'
+filename_conf = 'plate-to-well.json'
 if( not os.access(filename_conf, os.R_OK) ):
     sys.stderr.write('%s does not exist.\n'%filename_conf)
     sys.exit()

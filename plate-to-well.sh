@@ -4,7 +4,7 @@ do
   echo $TIF
   OUT=${TIF/.tif/.grid.jpg}
   if [ ! -e $OUT ]; then
-    $HOME/git/wellscan/plate-to-96.py $TIF
+    $HOME/git/wellscan/plate-to-well.py $TIF
   else
     echo "SKIP "$TIF
   fi
