@@ -15,3 +15,5 @@ DATA_NAME=$(ls $TIF | awk -F"_" '{print $1}')
 WELL_ADDRESS=$(ls $TIF | awk -F"." '{print $2}')
 MOVIE_NAME=$DATA_NAME"."$WELL_ADDRESS".avi"
 mencoder "mf://tmp/*.bmp" -mf fps=5 -o $MOVIE_NAME -ovc lavc
+
+rm -rf tmp
