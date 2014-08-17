@@ -39,9 +39,11 @@ if( int(conf['flip_horizontal']) > 0 ):
     im = im.transpose(Image.FLIP_LEFT_RIGHT)
 if( int(conf['flip_vertical']) > 0 ):
     im = im.transpose(Image.FLIP_TOP_BOTTOM)
+im.save('%s.flip.jpg'%filename_base,'jpeg', quality=50)
 if( rotate_angle != 0 ):
-    im = im.rotate(rotate_angle)
+    im = im.rotate(rotate_angle,expand=1)
 im = im.crop( (x1,y1,x2,y2) )
+im.save('%s.rotate.jpg'%filename_base,'jpeg', quality=50)
 
 x_max, y_max = im.size
 x_well_size = float(x_max)/cols
@@ -59,6 +61,7 @@ for row in range(0,rows+1):
 
 im_draw = im_draw.resize((int(x_max*0.10),int(y_max*0.10)),  Image.ANTIALIAS)
 im_draw.save('%s.grid.jpg'%filename_base,'jpeg', quality=50)
+sys.exit(1)
 
 row_list = ['A','B','C','D','E','F','G','H']
 for col in range(0,cols):

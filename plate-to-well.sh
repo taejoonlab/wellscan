@@ -1,5 +1,8 @@
 #!/bin/bash
-for TIF in $(ls *P?.tif)
+
+#export PYTHONPATH="/home1/00992/linusben/local/lib64/python2.6/site-packages/"
+
+for TIF in $(ls *.tif)
 do
   echo $TIF
   OUT=${TIF/.tif/.grid.jpg}
