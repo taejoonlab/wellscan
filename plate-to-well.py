@@ -41,7 +41,8 @@ if( int(conf['flip_vertical']) > 0 ):
     im = im.transpose(Image.FLIP_TOP_BOTTOM)
 im.save('%s.flip.jpg'%filename_base,'jpeg', quality=50)
 if( rotate_angle != 0 ):
-    im = im.rotate(rotate_angle,expand=1)
+    ## GIMP rotate and PIL rotate are opposite for the sign of angle
+    im = im.rotate(rotate_angle*-1.0,expand=1)
 im = im.crop( (x1,y1,x2,y2) )
 im.save('%s.rotate.jpg'%filename_base,'jpeg', quality=50)
 
