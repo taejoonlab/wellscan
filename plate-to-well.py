@@ -9,6 +9,7 @@ import numpy as np
 filename_tif = sys.argv[1]
 filename_base = filename_tif.replace('.tiff','').replace('.tif','')
 
+
 filename_conf = 'plate-to-well.json'
 if( not os.access(filename_conf, os.R_OK) ):
     sys.stderr.write('%s does not exist.\n'%filename_conf)
@@ -62,17 +63,18 @@ for row in range(0,rows+1):
 
 im_draw = im_draw.resize((int(x_max*0.10),int(y_max*0.10)),  Image.ANTIALIAS)
 im_draw.save('%s.grid.jpg'%filename_base,'jpeg', quality=50)
-sys.exit(1)
 
-row_list = ['A','B','C','D','E','F','G','H']
-for col in range(0,cols):
-    for row in range(0,rows):
-        x1 = int(x_well_size * col)
-        y1 = int(y_well_size * row)
-        x2 = int(x_well_size * (col+1))
-        y2 = int(y_well_size * (row+1))
-        dir_name = '%s%02d'%(row_list[row],col+1)
-        if( not os.access(dir_name, os.R_OK) ):
-            os.mkdir(dir_name,0755)
-        im_well = im.crop( (x1, y1, x2, y2) )
-        im_well.save(os.path.join(dir_name, '%s_%s%02d.tif'%(filename_base,row_list[row],col+1)),'tiff')
+
+if( len(sys.argv) > 2 and sys.argv[2] == '96' ):
+    row_list = ['A','B','C','D','E','F','G','H']
+    for col in range(0,cols):
+        for row in range(0,rows):
+            x1 = int(x_well_size * col)
+            y1 = int(y_well_size * row)
+            x2 = int(x_well_size * (col+1))
+            y2 = int(y_well_size * (row+1))
+            dir_name = '%s%02d'%(row_list[row],col+1)
+            if( not os.access(dir_name, os.R_OK) ):
+                os.mkdir(dir_name,0755)
+            im_well = im.crop( (x1, y1, x2, y2) )
+            im_well.save(os.path.join(dir_name, '%s_%s%02d.tif'%(filename_base,row_list[row],col+1)),'tiff')
