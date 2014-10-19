@@ -29,8 +29,6 @@ prev_im = Image.open(filename_list[0])
 for i in range(1,len(filename_list)):
     curr_im = Image.open(filename_list[i])
     tmp_rms = rmsdiff(prev_im.convert('RGB'), curr_im.convert('RGB'))
-    #tmp_rms = rmsdiff(prev_im.convert('L'), curr_im.convert('L'))
-    #print filename_list[i-1], filename_list[i], tmp_rms
-    f_out.write('%s\t%.3f\n'%(filename_list[i], tmp_rms)
+    f_out.write('%s\t%.3f\n'%(filename_list[i], tmp_rms))
     prev_im = curr_im
 f_out.close()
