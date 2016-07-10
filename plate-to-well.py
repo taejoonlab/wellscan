@@ -6,6 +6,9 @@ import json
 from PIL import Image, ImageDraw
 import numpy as np
 
+## Disable DecompressionBombWarning
+Image.MAX_IMAGE_PIXELS = None
+
 filename_tif = sys.argv[1]
 filename_base = filename_tif.replace('.tiff','').replace('.tif','')
 
@@ -63,7 +66,6 @@ for row in range(0,rows+1):
 
 im_draw = im_draw.resize((int(x_max*0.10),int(y_max*0.10)),  Image.ANTIALIAS)
 im_draw.save('%s.grid.jpg'%filename_base,'jpeg', quality=50)
-
 
 if( len(sys.argv) > 2 and sys.argv[2] == '96' ):
     row_list = ['A','B','C','D','E','F','G','H']
