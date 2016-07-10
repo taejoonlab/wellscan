@@ -12,3 +12,11 @@ do
     fi
   done
 done
+
+ADDRESS='grid'
+if [ -d $ADDRESS ]; then
+  echo $ADDRESS
+  cd $ADDRESS
+  $HOME/git/wellscan/make-movie.sh
+  cd ../
+fi
